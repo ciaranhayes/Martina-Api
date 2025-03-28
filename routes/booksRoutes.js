@@ -6,7 +6,8 @@ import {
     addNewBook, 
     getAllBooks,
     editWholeBook,
-    editBookPartial
+    editBookPartial,
+    deleteBookByID
 } from "../controllers/bookController.js"
 
 const booksRouter = Router();
@@ -24,6 +25,8 @@ booksRouter.post("/books/new", addNewBook);
 booksRouter.put("/books/edit/:ID", editWholeBook);
 
 booksRouter.patch("/book/patch/:ID", editBookPartial);
+
+booksRouter.delete("/books/remove/:ID", deleteBookByID);
 
 
 export default booksRouter;

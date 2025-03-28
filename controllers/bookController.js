@@ -156,4 +156,21 @@ async function editBookPartial(req, res) {
     }
 }
 
-export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks, editWholeBook, editBookPartial};
+// Delete controller 
+
+
+async function deleteBookByID(req, res) {
+    try {
+        const book = await Book.findByIdAndDelete(req.params.ID); 
+
+        if (!book) {
+            return res.status(404).json({ message: "Book Not Found To Delete" });
+        }
+
+        res.send("Book Deleted");
+    } catch (error) {
+        res.status(500).json( {message: error.message});
+    }
+}
+
+export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks, editWholeBook, editBookPartial, deleteBookByID};
