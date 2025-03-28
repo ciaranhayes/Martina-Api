@@ -62,6 +62,21 @@ async function getAllBooks(req, res) {
     }
 }
 
+async function getBookByGenre(req,res) {
+    try {
+        const genre = req.params.genre;
+        const books = await Book.find( { genres: genre} );
+
+        if (books.length === 0) {
+            return res.status(404).json({ message: "This genre doesn't exist"});
+        }
+
+        res.json(books);
+    } catch (error) {
+        res.status(500).json( {message: error.message});
+    }
+}
+
 // Post Controllers
 
 async function addNewBook(req, res) {
@@ -173,4 +188,4 @@ async function deleteBookByID(req, res) {
     }
 }
 
-export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks, editWholeBook, editBookPartial, deleteBookByID};
+export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks, editWholeBook, editBookPartial, deleteBookByID, getBookByGenre};
