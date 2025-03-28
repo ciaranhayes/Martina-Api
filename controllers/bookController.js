@@ -83,7 +83,7 @@ async function addNewBook(req, res) {
     try {
             const title = req.body.title;
             const author = req.body.author;
-            const genres = req.body.genres;
+            const genres = req.body.genre;
             const description = req.body.description;
             const page = req.body.page;
 
