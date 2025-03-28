@@ -1,6 +1,8 @@
 import { error } from "console";
 import Book from "../models/booksModel.js";
 
+
+// Get Functions
 async function getRandomBook(req, res) {
     try {
         const books = await Book.aggregate([{ $sample: {size: 1}}, 
@@ -50,4 +52,10 @@ async function getBookById(req, res) {
     }
 }
 
-export {getRandomBook, getBookTitlePartial, getBookById};
+// Post Controllers
+
+async function addNewBook(req, res) {
+
+}
+
+export {getRandomBook, getBookTitlePartial, getBookById, addNewBook};
