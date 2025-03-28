@@ -43,7 +43,7 @@ async function getBookById(req, res) {
             .select("title author genre short_description page_length");
         
         if (!book) {
-            return res.status(404).json({ message: "Movie Not Found" });
+            return res.status(404).json({ message: "Book Not Found" });
         }
 
         res.json(book);
@@ -82,10 +82,46 @@ async function addNewBook(req, res) {
 
             await newBook.save();
 
-            res.json(newBook);ge
+            res.json(newBook);
     } catch (error) {
         res.status(500).json( {message: error.message});
     }
 }
 
-export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks};
+// Put Controllers 
+
+async function editWholeBook(req, res) {
+    try {
+        const book = await Book.findById(req.params.ID) 
+
+        if (!book) {
+            return res.status(404).json({ message: "Book Not Found To Edit" });
+        }
+
+        const title = req.body.title;
+        const author = req.body.author;
+        const genre = req.body.genre;
+        const description = req.body.description;
+        const page = req.body.page;
+
+        const changedBook = await Book.findByIdAndUpdate( 
+            req.params.ID,
+            {
+                $set: {
+                    title: title,
+                    author: author,
+                    genre: genre,
+                    short_description: description,
+                    page_length: page
+                }
+            },
+            {new: true}
+        );
+    
+        res.json(changedBook);
+    } catch (error) {
+        res.status(500).json( {message: error.message});
+    }
+}
+
+export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks, editWholeBook};
