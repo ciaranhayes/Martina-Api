@@ -55,7 +55,27 @@ async function getBookById(req, res) {
 // Post Controllers
 
 async function addNewBook(req, res) {
+    try {
+            const title = req.body.title;
+            const author = req.body.author;
+            const genre = req.body.genre;
+            const description = req.body.description;
+            const page = req.body.page;
 
+            const newBook = new Book({
+                title: title, 
+                author: author,
+                genre: genre,
+                short_description: description,
+                page_length: page
+            })
+
+            await newBook.save();
+
+            res.json(newBook);ge
+    } catch (error) {
+        res.status(500).json( {message: error.message});
+    }
 }
 
 export {getRandomBook, getBookTitlePartial, getBookById, addNewBook};

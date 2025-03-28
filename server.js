@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     res.send("Welcome to the Queer Book Repository");
 });
 
-app.use("/api", bookRouter);
+app.use("/", bookRouter);
 
 app.listen(port, () => {
     console.log(`Running on port: ${port}`);
