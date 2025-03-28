@@ -9,7 +9,7 @@ async function getRandomBook(req, res) {
             { $project: { 
                 title: 1, 
                 author: 1, 
-                genre: 1, 
+                genres: 1, 
                 short_description: 1, 
                 page_length: 1 
             }}]);
@@ -28,7 +28,7 @@ async function getBookTitlePartial(req, res) {
         }
 
         const books = await Book.find({ title: { $regex: title, $options: "i"} })
-            .select("title author genre short_description page_length")
+            .select("title author genres short_description page_length")
             .limit(5);
 
         res.json(books);
@@ -40,7 +40,7 @@ async function getBookTitlePartial(req, res) {
 async function getBookById(req, res) {
     try {
         const book = await Book.findById(req.params.ID) 
-            .select("title author genre short_description page_length");
+            .select("title author genres short_description page_length");
         
         if (!book) {
             return res.status(404).json({ message: "Book Not Found" });
