@@ -52,6 +52,16 @@ async function getBookById(req, res) {
     }
 }
 
+async function getAllBooks(req, res) {
+    try {
+        const book = await Book.find();
+
+        res.json(book);
+    } catch (error) {
+        res.status(500).json( {message: error.message});
+    }
+}
+
 // Post Controllers
 
 async function addNewBook(req, res) {
@@ -78,4 +88,4 @@ async function addNewBook(req, res) {
     }
 }
 
-export {getRandomBook, getBookTitlePartial, getBookById, addNewBook};
+export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks};

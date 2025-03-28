@@ -3,7 +3,8 @@ import {
     getRandomBook, 
     getBookTitlePartial,  
     getBookById,
-    addNewBook
+    addNewBook, 
+    getAllBooks
 } from "../controllers/bookController.js"
 
 const booksRouter = Router();
@@ -11,6 +12,8 @@ const booksRouter = Router();
 booksRouter.get("/recommendation", getRandomBook);
 
 booksRouter.get("/books/search", getBookTitlePartial);
+
+booksRouter.get("/books", getAllBooks);
 
 booksRouter.get("/books/:ID", getBookById);
 
