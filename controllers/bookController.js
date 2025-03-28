@@ -115,7 +115,7 @@ async function editWholeBook(req, res) {
                     page_length: page
                 }
             },
-            {new: true}
+            { new: true }
         );
     
         res.json(changedBook);
@@ -124,4 +124,36 @@ async function editWholeBook(req, res) {
     }
 }
 
-export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks, editWholeBook};
+// Patch controller 
+
+async function editBookPartial(req, res) {
+    try {
+        const { title, author, genre, description, page} = req.body;
+
+        const book = await Book.findById(req.params.ID) 
+
+        if (!book) {
+            return res.status(404).json({ message: "Book Not Found To Edit" });
+        }
+
+        const update = {};
+
+        if (title) update.title = title;
+        if (author) update.author = author;
+        if (genre) update.genre = genre;
+        if (description) update.description = short_description;
+        if (page) update.page = page_length;
+
+        const changedBook = await Book.findByIdAndUpdate( 
+            req.params.ID,
+            { $set: update },
+            { new: true }
+        );
+    
+        res.json(changedBook);
+    } catch (error) {
+        res.status(500).json( {message: error.message});
+    }
+}
+
+export {getRandomBook, getBookTitlePartial, getBookById, addNewBook, getAllBooks, editWholeBook, editBookPartial};
