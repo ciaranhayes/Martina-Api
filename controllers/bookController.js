@@ -1,20 +1,40 @@
+import { error } from "console";
 import Book from "../models/booksModel.js";
 
 async function getRandomBook(req, res) {
     try {
-        const books = await Book.find({}).limit(1)
-            .select("title author genre short_description page_length");
+        const books = await Book.aggregate([{ $sample: {size: 1}}, 
+            { $project: { 
+                title: 1, 
+                author: 1, 
+                genre: 1, 
+                short_description: 1, 
+                page_length: 1 
+            }}]);
 
         res.json(books);
     } catch (error) {
-        res.status(500).json( {message: error.message})
+        res.status(500).json( {message: error.message});
     }
 }
 
-async function getBookTitlePartial(req, res) {}
+async function getBookTitlePartial(req, res) {
+    try {
+        const title = req.body.title;
+        if (!title) {
+            return res.status(400).json({ message: "Title is required"});
+        }
 
-async function getBookSimilarTitle(req, res) {}
+        const books = await Book.find({ title: { $regex: title, $options: "i"} })
+            .select("title author genre short_description page_length")
+            .limit(5);
+
+        res.json(books);
+    } catch (error) {
+        res.status(500).json( {message: error.message});
+    }
+}
 
 async function getBookById(req, res) {}
 
-export {getRandomBook, getBookTitlePartial, getBookSimilarTitle, getBookById};
+export {getRandomBook, getBookTitlePartial, getBookById};

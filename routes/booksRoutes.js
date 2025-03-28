@@ -1,8 +1,7 @@
 import { Router } from "express";
 import {
     getRandomBook, 
-    getBookTitlePartial, 
-    getBookSimilarTitle, 
+    getBookTitlePartial,  
     getBookById
 } from "../controllers/bookController.js"
 
@@ -10,9 +9,7 @@ const booksRouter = Router();
 
 booksRouter.get("/recommendation", getRandomBook);
 
-booksRouter.get("/books", getBookTitlePartial);
-
-booksRouter.get("/books", getBookSimilarTitle);
+booksRouter.get("/books/search", getBookTitlePartial);
 
 booksRouter.get("/books/:ID", getBookById);
 
