@@ -35,6 +35,19 @@ async function getBookTitlePartial(req, res) {
     }
 }
 
-async function getBookById(req, res) {}
+async function getBookById(req, res) {
+    try {
+        const book = await Book.findById(req.params.ID) 
+            .select("title author genre short_description page_length");
+        
+        if (!book) {
+            return res.status(404).json({ message: "Movie Not Found" });
+        }
+
+        res.json(book);
+    } catch (error) {
+        res.status(500).json( {message: error.message});
+    }
+}
 
 export {getRandomBook, getBookTitlePartial, getBookById};
