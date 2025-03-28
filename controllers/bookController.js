@@ -83,14 +83,14 @@ async function addNewBook(req, res) {
     try {
             const title = req.body.title;
             const author = req.body.author;
-            const genre = req.body.genre;
+            const genres = req.body.genres;
             const description = req.body.description;
             const page = req.body.page;
 
             const newBook = new Book({
                 title: title, 
                 author: author,
-                genre: genre,
+                genres: Array.isArray(genre) ? genres : [genres],
                 short_description: description,
                 page_length: page
             })
