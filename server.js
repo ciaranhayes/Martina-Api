@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./database/db.js";
 import bookRouter from "./routes/booksRoutes.js"
-import cors from cors;
+import cors from "cors";
 
 dotenv.config();
 connectDB();
