@@ -53,7 +53,7 @@ async function addNewBlog(req, res) {
             return res.status(400).json({ message: "Title, author, and text are required" });
         }
 
-        const newBlog = new Blog({ title, author, text });
+        const newBlog = new Blog({ title, author, text, category });
         await newBlog.save();
 
         res.status(201).json(newBlog);
@@ -69,7 +69,7 @@ async function editWholeBlog(req, res) {
 
         const updatedBlog = await Blog.findByIdAndUpdate(
             req.params.ID,
-            { $set: { title, author, text } },
+            { $set: { title, author, text, category } },
             { new: true }
         );
 
@@ -92,6 +92,7 @@ async function editBlogPartial(req, res) {
         if (title) update.title = title;
         if (author) update.author = author;
         if (text) update.text = text;
+        if (category) update.text = category;
 
         const updatedBlog = await Blog.findByIdAndUpdate(
             req.params.ID,
