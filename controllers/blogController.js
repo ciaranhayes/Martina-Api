@@ -47,7 +47,7 @@ async function getAllBlogs(req, res) {
 // Add a new blog
 async function addNewBlog(req, res) {
     try {
-        const { title, author, text } = req.body;
+        const { title, author, text, category } = req.body;
 
         if (!title || !author || !text) {
             return res.status(400).json({ message: "Title, author, and text are required" });
@@ -65,7 +65,7 @@ async function addNewBlog(req, res) {
 // Edit a whole blog (PUT)
 async function editWholeBlog(req, res) {
     try {
-        const { title, author, text } = req.body;
+        const { title, author, text, category } = req.body;
 
         const updatedBlog = await Blog.findByIdAndUpdate(
             req.params.ID,
@@ -87,7 +87,7 @@ async function editWholeBlog(req, res) {
 async function editBlogPartial(req, res) {
     try {
         const update = {};
-        const { title, author, text } = req.body;
+        const { title, author, text, category } = req.body;
 
         if (title) update.title = title;
         if (author) update.author = author;
