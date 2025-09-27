@@ -9,7 +9,7 @@ async function getBlogByTitlePartial(req, res) {
         }
 
         const blogs = await Blog.find({ title: { $regex: title, $options: "i" } })
-            .select("title author text date")
+            .select("title author text date category")
             .limit(5);
 
         res.json(blogs);
@@ -92,7 +92,7 @@ async function editBlogPartial(req, res) {
         if (title) update.title = title;
         if (author) update.author = author;
         if (text) update.text = text;
-        if (category) update.text = category;
+        if (category) update.category = category;
 
         const updatedBlog = await Blog.findByIdAndUpdate(
             req.params.ID,
