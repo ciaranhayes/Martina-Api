@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./database/db.js";
-import bookRouter from "./routes/booksRoutes.js"
+import blogRouter from "./routes/blogRouter.js"
 import cors from "cors";
 
 dotenv.config();
@@ -14,10 +14,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send("Welcome to the Queer Book Repository");
+    res.send("Welcome to the blog");
 });
 
-app.use("/", bookRouter);
+app.use("/", blogRouter);
 
 app.listen(port, () => {
     console.log(`Running on port: ${port}`);
