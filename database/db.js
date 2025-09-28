@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export default async function connectDB() {
     try {
-        await mongoose.connect(process.env.MONGO_DEPLOYED || process.env.MONGO_LOCAL);
+        await mongoose.connect(process.env.MONGO_LOCAL);
 
         console.log('Database has been accessed!')
     } catch (error) {
