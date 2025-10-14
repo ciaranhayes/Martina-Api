@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-    getBlogByTitlePartial,  
+    getBlogByTitlePartial,
     getBlogById,
     addNewBlog, 
     getAllBlogs,
@@ -9,27 +9,27 @@ import {
     deleteBlogByID
 } from "../controllers/blogController.js";
 
-const blogRouter = Router();
 
+const blogRouter = Router();
 // Search blogs by partial title
-blogRouter.get("/blogs/search", getBlogByTitlePartial);
+blogRouter.get("/search", getBlogByTitlePartial);
 
 // Get all blogs
-blogRouter.get("/blogs", getAllBlogs);
+blogRouter.get("/", getAllBlogs);
 
 // Get a single blog by ID
-blogRouter.get("/blogs/:ID", getBlogById);
+blogRouter.get("/:ID", getBlogById);
 
 // Add a new blog
-blogRouter.post("/blogs", addNewBlog);
+blogRouter.post("/", addNewBlog);
 
 // Replace a whole blog (PUT)
-blogRouter.put("/blogs/:ID", editWholeBlog);
+blogRouter.put("/:ID", editWholeBlog);
 
 // Edit blog partially (PATCH)
-blogRouter.patch("/blogs/:ID", editBlogPartial);
+blogRouter.patch("/:ID", editBlogPartial);
 
 // Delete a blog
-blogRouter.delete("/blogs/:ID", deleteBlogByID);
+blogRouter.delete("/:ID", deleteBlogByID);
 
 export default blogRouter;

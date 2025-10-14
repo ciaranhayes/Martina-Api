@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./database/db.js";
 import blogRouter from "./routes/blogRouter.js";
+import eventRouter from "./routes/eventRoutes.js";
 import cors from "cors";
 
 dotenv.config();
@@ -30,7 +31,8 @@ app.post("/login", (req, res) => {
   res.status(401).json({ success: false, message: "Invalid credentials" });
 });
 
-app.use("/", blogRouter);
+app.use("/blogs", blogRouter);
+app.use("/events", eventRouter);
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}`);
