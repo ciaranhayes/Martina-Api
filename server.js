@@ -4,6 +4,7 @@ import connectDB from "./database/db.js";
 import blogRouter from "./routes/blogRouter.js";
 import eventRouter from "./routes/eventRoutes.js";
 import cors from "cors";
+import bioRouter from "./routes/bioRouter.js";
 import imageRouter from "./routes/imageRouter.js";
 
 dotenv.config();
@@ -35,6 +36,7 @@ app.post("/login", (req, res) => {
 app.use("/blogs", blogRouter);
 app.use("/events", eventRouter);
 app.use("/uploads", imageRouter);
+app.use("/bios", bioRouter);
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}`);
