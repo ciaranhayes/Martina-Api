@@ -6,6 +6,7 @@ import eventRouter from "./routes/eventRoutes.js";
 import cors from "cors";
 import bioRouter from "./routes/bioRouter.js";
 import imageRouter from "./routes/imageRouter.js";
+import youtubeRouter from "./routes/youtubeRouter.js";
 
 dotenv.config();
 connectDB();
@@ -37,6 +38,7 @@ app.use("/blogs", blogRouter);
 app.use("/events", eventRouter);
 app.use("/uploads", imageRouter);
 app.use("/bios", bioRouter);
+app.use("/youtube", youtubeRouter);
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}`);
