@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const addableSectionsSchema = new mongoose.Schema({
     title: { type: String, required: true },
-    text: { type: String, required: true },
-    imageSrc: { type: String, required: true},
+    text: { type: String, required: false },
+    imageSrc: { type: [String], required: true},
     type: { type: String, required: true}
 }, { collection: 'sections'});
 
