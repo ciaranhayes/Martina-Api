@@ -8,6 +8,7 @@ import bioRouter from "./routes/bioRouter.js";
 import imageRouter from "./routes/imageRouter.js";
 import youtubeRouter from "./routes/youtubeRouter.js";
 import resrouceRouter from "./routes/resourceRouter.js";
+import sectionRouter from "./routes/sectionRouter.js";
 
 dotenv.config();
 connectDB();
@@ -41,6 +42,7 @@ app.use("/uploads", imageRouter);
 app.use("/bios", bioRouter);
 app.use("/youtube", youtubeRouter);
 app.use("/resource", resrouceRouter);
+app.use("/section", sectionRouter);
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}`);
