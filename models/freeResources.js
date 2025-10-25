@@ -4,7 +4,8 @@ const freeResourcesSchema = new mongoose.Schema({
     name: { type: String, required: true },
     url: { type: String, required: true },
     imageSrc: { type: String, required: true},
-    description: { type: String, required: true}
+    description: { type: String, required: true},
+    type: { type: Boolean, required: true}
 }, { collection: 'freeResources'});
 
 const Resources = mongoose.model("Resources",freeResourcesSchema);
