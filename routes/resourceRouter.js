@@ -30,13 +30,13 @@ resrouceRouter.get("/:id", async (req, res) => {
 // 🟡 POST add new resource
 resrouceRouter.post("/", async (req, res) => {
   try {
-    const { name, url, imageSrc, description } = req.body;
+    const { name, url, imageSrc, description, type} = req.body;
 
     if (!name || !url || !imageSrc || !description) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const newResource = new Resources({ name, url, imageSrc, description });
+    const newResource = new Resources({ name, url, imageSrc, description, type });
     await newResource.save();
 
     res.status(201).json(newResource);
